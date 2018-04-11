@@ -1,0 +1,146 @@
+.container-fluid{
+    padding-left:0px;
+    padding-right: 0px;
+}
+.navbar{
+    background: #0089dc;
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    font-size:large;
+}
+#navbar-brand{
+    width:100px;
+    font-size:x-large;
+    font-weight: bold;
+}
+.nav{
+    width:80%;
+}
+#logCheck>button,#logCheck>form>button{
+    background: #0089dc;
+    color: #fff;
+}
+
+
+<!--左侧导航栏main2-->
+.panel-primary {
+    border-color: #0089dc;
+}
+
+
+.panel-group{max-height:770px;overflow: auto;}
+            .leftMenu{margin:2px;}
+            .leftMenu .panel-heading{font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
+            .leftMenu .menu-item-left{padding: 2px; background: transparent; border:1px solid transparent;border-radius: 6px;}
+            .leftMenu .menu-item-left:hover{background:#C4E3F3;border:1px solid #0089dc;}
+
+<!--左侧导航栏main3-->
+.food_kind{
+        background: hsla(0,0%,100%,.8);
+        color: #000000;
+}
+.food_kind>a{
+        color: #000000;
+}
+
+.row{
+        float: left;
+        width: 100px;
+        padding: 0px;
+        border: 0px;
+        margin: 0px;
+}
+#leftSideBar{
+    background-color: #f6f9fa;
+    border: 1px solid #e5e9ef;
+    border-radius: 4px;
+    font-size: small;
+    padding: 0px;
+}
+<!--首页右侧 main3-->
+.right{
+overflow: hidden;
+
+}
+.food_ul{
+            display: block;
+    position: relative;
+    min-height: 300px;
+    margin: 15px;
+}
+.food_li{
+    width: 242px;
+    height: 288px;
+    float: left;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.food_li:nth-child(4n+1) .food_outer{left:0}
+.food_li:nth-child(4n+2) .food_outer{left:242px}
+.food_li:nth-child(4n+3) .food_outer{left:484px}
+.food_li:nth-child(4n+4) .food_outer{left:726px}
+
+.food_outer {
+    padding: 10px 10px 10px 10px;
+    background-color: #fff;
+    width: 210px;
+    height: 280px;
+    margin: 0px 16px 10px 16px;
+    background-color: #f6f9fa;
+    border: 1px solid #e5e9ef;
+}
+
+.food_inner {
+    position: absolute;
+     width: 188px;
+    height: 258px;
+    padding:0px;
+    margin: 0px;
+}
+
+.food_img{
+    height: 156px;
+    width: 188px;
+    border: 1px solid #eaeaea;
+    background-color: #fff;
+    position: relative;
+    text-align: center;
+    line-height: 152px;
+}
+
+.scroll-loading {
+            width: 100%;
+    height: 100%;
+            vertical-align: middle;
+    background-image: url(http://xs01.meituan.net/waimai_web/img/dyl_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.food_price {
+        float:right;
+    font-family: arial;
+        letter-spacing: 0.8px;
+            color: #99CCCC;
+    font-weight: 700;
+}
+.food_description{
+    color: #999;
+    margin-top: 3px;
+        font-size: 12px;
+}
+
+<!--去除小黑点-->
+ul,li{
+list-style: none;
+}
+
+
+<!--multi-->
+#find_user{
+    margin-top:0px;
+     position:relative;
+}

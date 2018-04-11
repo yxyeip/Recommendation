@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>多人订餐页面</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/svgStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <ul id="myTab" class="nav nav-tabs ">
+            <div class="navbar-header ">
+                <a class="navbar-brand" href="#" color: "#fff">舌尖</a>
+            </div>
+            <li class=" nav_item">
+                <a href="./main3.html" data-toggle="tab" class="item">首页</a>
+            </li>
+            <li class="dropdown nav_item active">
+                <a href="#" id="myTabDrop1" class="dropdown-toggle item" data-toggle="dropdown">订餐 
+			<b class="caret"></b>
+		</a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                    <li><a href="./singleOrder.html" tabindex="-1" data-toggle="tab" class="item nav_item">单人订餐</a></li>
+                    <li><a href="./multiOrder.html" tabindex="-1" data-toggle="tab" class="item nav_item">多人订餐</a></li>
+                </ul>
+            </li>
+            <li><a href="#order" data-toggle="tab" class="item">我的订单</a></li>
+            <li><a href="#info" data-toggle="tab" class="item">个人信息</a></li>
+            <div class="login"><button class="btn btn-primary" type="button">
+				<!-- react-text: 35 -->登录<!-- /react-text -->
+			</button>
+            </div>
+        </ul>
+    </div>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active">
+           <div class="tab-pane fade" id="multi">
+            <div style="display:flex;">
+                <div style="flex:1" class="add user">
+                    <p> multi</p>
+                    <div class="input-group " id="find_user">
+                        <input type="text" class="form-control"  placeholder="查找与你一起进餐的用户" />
+                        <span class="input-group-btn">  
+                            <button class="btn btn-info btn-search">查找</button>  
+                            <button class="btn btn-info btn-search" style="margin-left:3px">添加</button>  
+                        </span>
+                    </div>
+                </div>
+                <div style="flex:3" class="all added user">
+                    <p>推荐菜单：</p>
+                    <button class="btn btn-info">下单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
