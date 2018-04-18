@@ -1,0 +1,15 @@
+.h-100{
+   max-width: 540px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+}
+.row{
+    float:center;
+}
+label{
+    font-weight: normal;
+    display: inline-block;
+}

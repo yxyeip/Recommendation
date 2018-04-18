@@ -9,6 +9,7 @@ import com.sun.org.apache.bcel.internal.generic.Select;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import entity.api.Customer;
+import entity.impl.CustomerImpl;
 import util.*;
 public class CustomerDao {
 	//1成功0失败2用户不存在
@@ -37,14 +38,15 @@ public class CustomerDao {
 		}
 	}
 
-	public static boolean register(Customer user) {
+	public static boolean logon(Customer user) {
 		String sql=String.format("Select * from Recommand..customer where name = '%s'", user.getName());
 		DBconn.init();
 		try {
-			if(DBconn.selectSql(sql)==null)
+			if(!DBconn.selectSql(sql).next())
 			{
 				//插入
-				sql=String.format("insert into Recommand..Customer(name,password,sex,birthday,height,weight) values ('%s','%s',%b,%tx,%d,%d)", user.getName(),user.getPassword());
+				sql=String.format("insert into Recommand..customer(name,password,sex,birthday,height,weight) values ('%s','%s',%d,'%s',%d,%d)", 
+						user.getName(),user.getPassword(),user.getSex()==false?0:1,user.getBirthday(),user.getHeight(),user.getWeight());
 				if(DBconn.addUpdDel(sql)==1) return true;
 			}
 		} catch (Exception e) {
@@ -75,7 +77,7 @@ public class CustomerDao {
 	private int height;*/
 
 	public static boolean update(String name, String pwd, Boolean sex,Date birthday, int height, int weight){
-		String sql=String.format("Select * from Recommand..customer where name = %s", name);
+		String sql=String.format("Select * from Recommand..customer where name = '%s'", name);
 		DBconn.init();
 		if(DBconn.selectSql(sql)!=null)
 		{
@@ -84,6 +86,33 @@ public class CustomerDao {
 			return true;
 		}
 		return false;
+	}
+	public static Customer getCustomer(String name) {
+		Customer customer=new CustomerImpl();
+		String sql=String.format("Select * from Recommand..customer where name = '%s'", name);
+		DBconn.init();
+		ResultSet rSet=DBconn.selectSql(sql);
+		if(rSet==null) {
+			return null;
+		}else {
+			try {
+				if(rSet.next()) {
+					customer.setName(name);
+					customer.setPassword("");
+					customer.setSex(rSet.getBoolean("sex"));
+					customer.setBirthday(rSet.getDate("birthday"));
+					customer.setWeight(rSet.getInt("weight"));
+					customer.setHeight(rSet.getInt("height"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				DBconn.closeConn();
+			}
+			return customer;
+		}
+		
 	}
 	
 }

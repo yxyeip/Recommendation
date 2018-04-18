@@ -33,11 +33,13 @@ public class CheckUserState extends HttpServlet {
         response.setContentType("application/json;charset=utf-8");
         HttpSession session=request.getSession();
         Gson gson = new Gson(); 
-        if(session.isNew()||session.getAttribute("state")==null) {
+        String state=session.getAttribute("state")==null?null:session.getAttribute("state").toString();
+        if(session.isNew()||state==null) {
         	UserState userState=new UserState("","not login");
         	response.getWriter().append(gson.toJson(userState));
         }
-        else if(session.getAttribute("state").toString().equals("log in")) {//ÒÑ¾­µÇÂ¼
+        else if(state.equals("log in")||
+        		state.equals("log on")) {//ÒÑ¾­µÇÂ¼»ò¸Õ×¢²á
     	    UserState userState=new UserState(session.getAttribute("userName").toString(),"log in");
        		response.getWriter().append(gson.toJson(userState).toString());
         } else{//Î´µÇÂ¼

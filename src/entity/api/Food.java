@@ -14,5 +14,6 @@ public interface Food {
 	
 	public String getDescription();
 	//public void 
+	public String getKind();
 
 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>个人信息</title>
+
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+    <link rel="stylesheet" type="text/css" href="css/info.css">
+</head>
+
+<body onload="checkUserState();loadCustomerInfo()">
+    <div id="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header ">
+                    <a class="navbar-brand" id="navbar-brand" href="#">舌尖</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="nav_item">
+                        <a href="main.html"  class="item">首页</a>
+                    </li>
+                    <li class="dropdown nav_item">
+                        <a href="#" class="dropdown-toggle item" data-toggle="dropdown">订餐 <b class="caret"></b>
+		          </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="singleOrder.html" class="item nav_item">单人订餐</a></li>
+                            <li><a href="./multiOrder.html" class="item nav_item">多人订餐</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#order" class="item">我的订单</a></li>
+                    <li class="active"><a href="info.html" class="item">个人信息</a></li>
+                </ul>
+                <div class="login" id="logCheck">
+                    <!--<button type='button' class='btn btn-default navbar-btn' onclick='jump()' id='logout'> 退出</button>-->
+                </div>
+            </div>
+        </nav>
+    </div>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">点击保存按钮可修改个人信息</h4>
+                            <form method="POST" action="UpdateInfoServlet">
+
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input id="name" type="text" class="form-control" name="name" required autofocus>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sex">sex</label>
+                                    <input type="radio" name="sex" value="male" id="male" /> Male
+                                    <input type="radio" name="sex" value="female" id="female" /> Female
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="birthday">Birthday</label>
+                                    <input id="birthday" type="date" class="form-control" name="birthday" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="height">Height(cm)</label>
+                                    <input id="height" type="number" class="form-control" name="height" min="15" max="230" step="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="weight">Weight(kg)</label>
+                                    <input id="weight" type="number" class="form-control" name="weight" min="3" max="150" step="1" required>
+                                </div>
+
+                                <div class="form-group no-margin">
+                                    <button type="submit" class="btn btn-primary btn-block">
+										保存
+									</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/my-login.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/info.js"></script>
+</body>
+
+</html>

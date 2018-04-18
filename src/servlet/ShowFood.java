@@ -4,19 +4,29 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
+
+import com.google.gson.Gson;
+
+import Dao.CustomerFoodRateDao;
 import Dao.DBconn;
+import Dao.FoodDao;
+import entity.impl.CustomerFoodRate;
+import entity.impl.FoodImpl;
 
 /**
  * Servlet implementation class ShowFood
  */
-@WebServlet("/ShowFood")
+@WebServlet(urlPatterns={"/ShowFood"})
 public class ShowFood extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,33 +42,22 @@ public class ShowFood extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
         request.setCharacterEncoding("UTF-8");  
-        String kind = request.getParameter("kind");
-        response.setContentType("text/html; charset=utf-8");  
-        PrintWriter pw = response.getWriter(); 
-       // pw.print(generateKindHtml(kind));
+        String kind = new String(request.getParameter("kind").getBytes("iso8859-1"),"utf-8"); 
+        response.setContentType("application/json;charset=utf-8"); 
+        HttpSession httpSession=request.getSession();
+        Gson gson=new Gson();
+        if(httpSession.getAttribute("userName")==null) {
+        	List<FoodImpl> allfood=FoodDao.getFoodListByKind(kind);
+            response.getWriter().append(gson.toJson(allfood));
+        }else {
+        	List<CustomerFoodRate> customerFoodRates=CustomerFoodRateDao.selectCustomerFoodRate(httpSession.getAttribute("userName").toString(), kind);
+        	response.getWriter().append(gson.toJson(customerFoodRates));
+        }
+        
 	}
-/*
-	private String generateKindHtml(String kind) {
-		String html;
-		String sql=String.format("select * from food where kinds= '%s'", kind);
-		DBconn.init();
-		ResultSet r=DBconn.selectSql(sql);
-		try {
-			while(r.next()) {
-				
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DBconn.closeConn();
-		
-	}
-	*/
+
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -68,3 +67,4 @@ public class ShowFood extends HttpServlet {
 	}
 
 }
+

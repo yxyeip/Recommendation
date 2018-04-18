@@ -12,7 +12,17 @@ public class CustomerImpl implements Customer {
 	private Date birthday;
 	private int weight;
 	private int height;
-	
+	public CustomerImpl() {
+		
+	}
+	public CustomerImpl(String name,String password,Boolean sex,Date birthday,int height,int weight) {
+		this.name=name;
+		this.password=password;
+		this.sex=sex;
+		this.birthday=birthday;
+		this.weight=weight;
+		this.height=height;
+	}
 	@Override
 	public int getId() {
 		return Id;

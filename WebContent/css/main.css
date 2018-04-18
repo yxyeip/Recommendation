@@ -5,70 +5,75 @@
 .navbar{
     background: #0089dc;
     color: #fff;
+    margin-bottom: 10px;
 }
 .navbar-default .navbar-nav>li>a {
     color: #fff;
     font-size:large;
 }
-#navbar-brand{
+.navbar-header,#navbar-brand{
+    color: #fff;
     width:100px;
     font-size:x-large;
     font-weight: bold;
+    text-align:center
 }
-.nav{
-    width:80%;
-}
+
 #logCheck>button,#logCheck>form>button{
     background: #0089dc;
     color: #fff;
+    float:right;
+}
+
+.body{
+    width: 100%;
+    height:auto;
 }
 
 
-<!--左侧导航栏main2-->
-.panel-primary {
-    border-color: #0089dc;
-}
 
 
-.panel-group{max-height:770px;overflow: auto;}
-            .leftMenu{margin:2px;}
-            .leftMenu .panel-heading{font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
-            .leftMenu .menu-item-left{padding: 2px; background: transparent; border:1px solid transparent;border-radius: 6px;}
-            .leftMenu .menu-item-left:hover{background:#C4E3F3;border:1px solid #0089dc;}
 
-<!--左侧导航栏main3-->
+
 .food_kind{
         background: hsla(0,0%,100%,.8);
         color: #000000;
 }
 .food_kind>a{
         color: #000000;
+        width: 100%;
+        height:100%;
 }
 
-.row{
-        float: left;
+.left{
+	position: fixed;
+left: 0;
+top: 62px;
+
+        /*float: left;*/
         width: 100px;
         padding: 0px;
         border: 0px;
         margin: 0px;
-}
-#leftSideBar{
-    background-color: #f6f9fa;
+        background-color: #f6f9fa;
     border: 1px solid #e5e9ef;
     border-radius: 4px;
     font-size: small;
     padding: 0px;
 }
-<!--首页右侧 main3-->
-.right{
-overflow: hidden;
 
+
+.food_list{
+	 display: block;
+    position: relative;
+    min-height: 600px;
+margin-left: 100px;
 }
 .food_ul{
-            display: block;
+    display: block;
     position: relative;
-    min-height: 300px;
-    margin: 15px;
+    min-height: 600px;
+	padding:0px;
 }
 .food_li{
     width: 242px;
@@ -133,11 +138,20 @@ overflow: hidden;
         font-size: 12px;
 }
 
-<!--去除小黑点-->
+
+
+
+
 ul,li{
 list-style: none;
 }
 
+/*星级评分底部对齐*/
+
+.rate{
+    position: absolute;
+    bottom: 2px;
+}
 
 <!--multi-->
 #find_user{
