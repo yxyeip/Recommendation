@@ -1,5 +1,8 @@
 package entity.impl;
-
+/**
+ * @author Ye xiuyun
+ *
+ */
 import java.util.Date;
 
 import entity.api.Customer;
@@ -8,7 +11,7 @@ public class CustomerImpl implements Customer {
 	private int Id;
 	private String name;
 	private String password;
-	private Boolean sex;
+	private Boolean sex;//is male
 	private Date birthday;
 	private int weight;
 	private int height;

@@ -3,6 +3,7 @@ package Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.sun.org.apache.bcel.internal.generic.Select;
@@ -10,6 +11,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import entity.api.Customer;
 import entity.impl.CustomerImpl;
+import sun.awt.image.ImageWatched.Link;
 import util.*;
 public class CustomerDao {
 	//1成功0失败2用户不存在
@@ -114,5 +116,36 @@ public class CustomerDao {
 		}
 		
 	}
-	
+	public static List<String> getAllCustomerNames() {
+		List<String> userNames=new LinkedList<String>();
+		String sql="Select name from Recommand..customer";
+		DBconn.init();
+		ResultSet rSet=DBconn.selectSql(sql);
+		try {
+			while(rSet.next()) {
+				userNames.add(rSet.getString("name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBconn.closeConn();
+		}
+		return userNames;
+	}
+	public static List<String> getCustomerNameAcorrdingInput(String userName){
+		List<String>userNames=new LinkedList<String>();
+		String sql=String.format("select name from Recommand..customer where name like '%s'", "%"+userName+"%");
+		DBconn.init();
+		ResultSet rSet=DBconn.selectSql(sql);
+		try {
+			while(rSet.next()) {
+				userNames.add(rSet.getString("name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBconn.closeConn();
+		}
+		return userNames;
+	}
 }

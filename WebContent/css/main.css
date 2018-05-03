@@ -1,12 +1,18 @@
+#header{
+    min-width: 780px;
+    
+}
 .container-fluid{
     padding-left:0px;
     padding-right: 0px;
+    min-width: 880px;
 }
 .navbar{
     background: #0089dc;
     color: #fff;
     margin-bottom: 10px;
 }
+
 .navbar-default .navbar-nav>li>a {
     color: #fff;
     font-size:large;
@@ -24,15 +30,13 @@
     color: #fff;
     float:right;
 }
-
+.login{
+    max-width: 300px;
+}
 .body{
     width: 100%;
     height:auto;
 }
-
-
-
-
 
 
 .food_kind{

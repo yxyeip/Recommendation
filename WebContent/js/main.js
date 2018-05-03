@@ -61,7 +61,7 @@ function applyRate(){
 				//dataType: "json",
 				data: {
 					score: score,
-					name: $(this).attr('id')
+					id: $(this).attr('id')
 				},
 				success: function (response) {
 					
@@ -121,7 +121,8 @@ function ShowFood(kind,callback) {
 				if(remove!=null)
 				inner.removeChild(remove);
 				inner.appendChild(rate);
-				rate.id = json_food_list[i].name;
+				//rate.id = json_food_list[i].name;
+				rate.id = json_food_list[i].id;
 				ul.appendChild(cloneLi);
 			}
 			for (var i = 0; i < number; i++) {

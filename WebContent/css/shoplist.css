@@ -34,7 +34,7 @@
 .item-content{
     padding:0px;
 }
-.item-content .item-pic {
+.item-pic {
     width: 40%;
     height: 80px;
     border: 1px solid #eee;
@@ -60,10 +60,11 @@ td-info .td-inner{
     padding-right:5px;
 }
 .th-price, .td-price {
-    width: 10%;
+    width: 9%;
 }
 .th-amount, .td-amount {
-    width: 6%;
+    width: 9%;
+    min-width: 100px;
 }
 .th-sum, .td-sum {
     width: 10%;
@@ -79,18 +80,6 @@ td-info .td-inner{
     z-index: 1;
 }
 
-.item-content .item-amount a {
-    display: block;
-    height: 23px;
-    width: 17px;
-    border: 1px solid #e5e5e5;
-    background: #f0f0f0;
-    text-align: center;
-    line-height: 23px;
-    color: #444;
-    position: absolute;
-    top: 0;
-}
 
 .item-content .text-amount {
     width: 39px;
@@ -104,7 +93,7 @@ td-info .td-inner{
     background-position: -75px -375px;
     position: absolute;
     z-index: 2;
-    left: 18px;
+    left: 0px;
     top: 0;
 }
 
@@ -136,8 +125,83 @@ td-info .td-inner{
     padding-top:20px;
 }
 
+.text-amount{
+    float: left;
+    width:50px;
+    margin-left:auto;margin-right:auto;
+}
 
-.item-content .item-amount .plus, .item-content .item-amount .no-plus {
-    border-left-color: transparent;
+
+ul,li{
+list-style: none;
+}
+
+/*plus*/
+
+
+/*bottom */
+.fixed-bottom {
+    position: fixed;
+    bottom: 0px;
+    z-index: 9999;
+    background: #e5e5e5;
+    height: 50px;
+    width: 100%;
+}
+
+float-bar-left{
+    float: left;
+    width:50%;
+
+}
+.float-bar-right {
+    float: right;
+    position: absolute;
     right: 0;
+    top: 0;
+    z-index: 4;
+    padding-left: 20px;
+    width: 50%;
+}
+.amount-sum{
+    float: left;
+    width:40%;
+}
+.price-sum{
+    float: left;
+    width:40%;
+}
+.btn-area{
+float: left;
+ width:20%;
+}
+
+.amount-sum em,.price em{
+    color: #f40;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 48px;
+    font-family: Arial;
+    vertical-align: middle;
+}
+
+.txt {
+    line-height: 48px;
+    font-family: tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+}
+.submit-btn {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    background: #f40;
+    text-align: center;
+    font-family: 'Lantinghei SC','Microsoft Yahei';
+    font-size: 20px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
 }

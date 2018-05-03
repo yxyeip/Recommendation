@@ -1,17 +1,22 @@
 package entity.impl;
-
+/**
+ * @author Ye xiuyun
+ *
+ */
 import java.math.BigDecimal;
 
-public class CustomerFoodRate {
+public class CustomerFoodRank {
 	//private FoodImpl foodImpl;
 	private String name;
 	private BigDecimal price;
 	private String description;
-	private int rate;
-	public CustomerFoodRate(String foodName, BigDecimal price,String description,int rate) {
+	private int rank;
+	private int id;
+	public CustomerFoodRank(String foodName, BigDecimal price,String description,int rank,int id) {
 		this.name=foodName;
 		this.price=price;
 		this.description=description;
-		this.rate=rate;
+		this.rank=rank;
+		this.id=id;
 	}
 }

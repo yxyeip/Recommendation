@@ -17,10 +17,10 @@ import org.apache.catalina.Session;
 
 import com.google.gson.Gson;
 
-import Dao.CustomerFoodRateDao;
+import Dao.CustomerFoodRankDao;
 import Dao.DBconn;
 import Dao.FoodDao;
-import entity.impl.CustomerFoodRate;
+import entity.impl.CustomerFoodRank;
 import entity.impl.FoodImpl;
 
 /**
@@ -51,7 +51,7 @@ public class ShowFood extends HttpServlet {
         	List<FoodImpl> allfood=FoodDao.getFoodListByKind(kind);
             response.getWriter().append(gson.toJson(allfood));
         }else {
-        	List<CustomerFoodRate> customerFoodRates=CustomerFoodRateDao.selectCustomerFoodRate(httpSession.getAttribute("userName").toString(), kind);
+        	List<CustomerFoodRank> customerFoodRates=CustomerFoodRankDao.selectCustomerFoodRank(httpSession.getAttribute("userName").toString(), kind);
         	response.getWriter().append(gson.toJson(customerFoodRates));
         }
         

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Dao.CustomerFoodRateDao;
+import Dao.CustomerFoodRankDao;
 
 /**
  * Servlet implementation class UploadRate
@@ -31,16 +31,16 @@ public class UploadRate extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String foodName=request.getParameter("name");
+		int foodId=Integer.valueOf(request.getParameter("id"));
 		String score=request.getParameter("score");
-		int rate=Integer.valueOf(score);	
+		int rank=Integer.valueOf(score);	
 		HttpSession httpSession=request.getSession();
 		if(httpSession.getAttribute("userName")==null)
 		{
 			response.getWriter().append("not log in");
 		}else {
 			String userName=httpSession.getAttribute("userName").toString();
-			CustomerFoodRateDao evaluationDao=new CustomerFoodRateDao(userName,foodName,rate);
+			CustomerFoodRankDao evaluationDao=new CustomerFoodRankDao(userName,foodId,rank);
 			if(evaluationDao.insertOrUpdate()==false)
 				response.getWriter().append("insert failed");
 			else
