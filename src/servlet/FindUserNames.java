@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import Dao.CustomerDao;
+import entity.api.Customer;
 
 /**
  * Servlet implementation class FindUserNames

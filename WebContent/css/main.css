@@ -28,10 +28,10 @@
 #logCheck>button,#logCheck>form>button{
     background: #0089dc;
     color: #fff;
-    float:right;
 }
 .login{
     max-width: 300px;
+    float: right;
 }
 .body{
     width: 100%;

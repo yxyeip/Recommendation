@@ -49,7 +49,7 @@
 
                     </div>
                     <span class="input-group-btn">
-					   <button class="btn btn-search" style="margin-left: 3px">添加</button>
+					   <button class="btn btn-search" id="add_user_btn"style="margin-left: 3px">添加</button>
 				    </span>
                 </div>
             </div>
@@ -57,14 +57,14 @@
             <div id="userCardList">
                 <div class="userCard">
                     <div class="userImg">
-                        <img class="img-rounded" src="img/头像.jpg" height="52px" width="52px">
+                        <img class="img-rounded" src="img/user1.jpg" height="52px" width="52px">
                     </div>
                     <div class="userInfo">
                         <p class="userName">userName1</p>
-                        <span class="sex">男</span><span class="birthday">      21</span>
+                        <span class="sex">男</span><span class="birthday">      1996-02-24</span>
                     </div>
                     <div class="operation">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-remove remove_user" aria-hidden="true"></span>
                     </div>
                 </div>
                 <div class="userCard"></div>
@@ -109,7 +109,7 @@
                                     </div>
                                 </th>
                                 <th class="menu_img">
-                                    <img src="img/爆炒竹鸡.jpg" height="40px">
+                                    <img class="img-rounded"src="img/food1.jpg" height="60px">
                                 </th>
                                 <th class="menu_des">
                                     <div class="food_content">
@@ -138,7 +138,7 @@
                                 </th>
                                 <th class="menu_operation">
                                     <div class="menu_operation_div">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-remove remove_menu" aria-hidden="true"></span>
                                     </div>
                                 </th>
                             </tr>
@@ -149,7 +149,7 @@
                                     </div>
                                 </th>
                                 <th class="menu_img">
-                                    <img src="img/爆炒竹鸡.jpg" height="40px">
+                                    <img class="img-rounded" src="img/food2.jpg" height="60px">
                                 </th>
                                 <th class="menu_des">
                                     <div class="food_content">
@@ -189,17 +189,20 @@
 
             <div class="fixed-bottom">
                 <div class="shopCartIcon ">
-                    <img src="img/shop_bag.svg" height="35px">
-
+                    
                 </div>
                 <div class="amount-sum">
-                    <span class="txt">已选商品</span><em id="J_SelectedItemsCount">24</em><span class="txt">件</span>
+                    <span class="txt">已选商品 </span><em id="J_SelectedItemsCount">24</em><span class="txt"> 件</span>
                 </div>
                 <div class="price-sum">
                     <span class="txt">合计：</span><strong class="total_price"><em id="J_Total" class="price_txt"><span class="total-symbol">&nbsp;￥</span>3079.91</em></strong></div>
                 <div class="btn-area">
-                    <a href="javascript:void(0)" id="J_Go" class="submit-btn" aria-label="请注意如果没有选择宝贝，将无法结算">
-                        <span>结&nbsp;算</span><b></b></a>
+                   <!-- <a href="javascript:void(0)" id="J_Go" class="submit-btn">-->
+                       结&nbsp;算
+                       <button type="button" class="btn" id="Go_btn">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                        <b></b>
+                   </button>
                         </div>
             </div>
 

@@ -134,7 +134,7 @@ public class CustomerDao {
 	}
 	public static List<String> getCustomerNameAcorrdingInput(String userName){
 		List<String>userNames=new LinkedList<String>();
-		String sql=String.format("select name from Recommand..customer where name like '%s'", "%"+userName+"%");
+		String sql=String.format("select * from Recommand..customer where name like '%s'", "%"+userName+"%");
 		DBconn.init();
 		ResultSet rSet=DBconn.selectSql(sql);
 		try {

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,19 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Dao.CustomerFoodRankDao;
+import org.apache.catalina.Session;
+
+import com.google.gson.Gson;
+
+import Dao.GuestDao;
+import entity.api.Customer;
 
 /**
- * Servlet implementation class UploadRate
+ * Servlet implementation class LoadGuests
  */
-@WebServlet("/UploadRate")
-public class UploadRate extends HttpServlet {
+@WebServlet("/LoadGuests")
+public class LoadGuests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadRate() {
+    public LoadGuests() {
         super();
     }
 
@@ -29,30 +36,21 @@ public class UploadRate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		int foodId=Integer.valueOf(request.getParameter("id"));
-		String score=request.getParameter("score");
-		int rank=Integer.valueOf(score);	
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;charset=utf-8"); 
 		HttpSession httpSession=request.getSession();
-		if(httpSession.getAttribute("userName")==null)
-		{
-			response.getWriter().append("not log in");
-		}else {
-			String userName=httpSession.getAttribute("userName").toString();
-			CustomerFoodRankDao evaluationDao=new CustomerFoodRankDao(userName,foodId,rank);
-			if(evaluationDao.insertOrUpdate()==false)
-				response.getWriter().append("insert failed");
-			else
-				response.getWriter().append("success");
-		}	
+		String master=httpSession.getAttribute("userName")==null?"yxyeip":httpSession.getAttribute("userName").toString();
+		List<Customer>guestList=GuestDao.getNewGuest(master);
+		Gson gson=new Gson();
+		response.getWriter().append(gson.toJson(guestList));
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);	
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

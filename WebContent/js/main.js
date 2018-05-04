@@ -40,13 +40,13 @@ function checkUserState() {
 
 $("li.food_kind a").click(
 	function(){
-		ShowFood($(this).attr("id"),applyRate);
+		ShowFood($(this).attr("id"),applyRank);
 		
 	}
 );
 
-function applyRate(){
-	$(".rate").raty({
+function applyRank(){
+	$(".rank").raty({
 		hints: ['1', '2', '3', '4', '5'],
 		path: "./raty/images",
 		starOn: 'star-on.png',
@@ -56,7 +56,7 @@ function applyRate(){
 		click: function (score, evt) {
 			//alert($(this).attr('data_score'));
 			$.ajax({
-				url: "UploadRate",
+				url: "UploadRank",
 				type: "post",
 				//dataType: "json",
 				data: {
@@ -111,18 +111,19 @@ function ShowFood(kind,callback) {
 				var descriptionNode = cloneLi.getElementsByClassName("food_description")[0];
 				var text = json_food_list[i].description == null ? "" : json_food_list[i].description;
 				descriptionNode.innerHTML = "<p>" + text + "</P>";
-				//rate
-				var rate = document.createElement("div");
-				rate.setAttribute("class","rate");
-				rate.setAttribute("data_score",json_food_list[i].rate == null ? 0 : json_food_list[i].rate);
-				//除去之前的rate标签
+				//rank
+				var rank = document.createElement("div");
+				rank.setAttribute("class","rank");
+				rank.setAttribute("data_score",json_food_list[i].rank == null ? 0 : json_food_list[i].rank);
+				console.log(rank.getAttribute("data_score"));
+				//除去之前的rank标签
 				var inner=cloneLi.getElementsByClassName("food_inner")[0];
-				var remove=inner.getElementsByClassName("rate")[0];
+				var remove=inner.getElementsByClassName("rank")[0];
 				if(remove!=null)
 				inner.removeChild(remove);
-				inner.appendChild(rate);
-				//rate.id = json_food_list[i].name;
-				rate.id = json_food_list[i].id;
+				inner.appendChild(rank);
+				//rank.id = json_food_list[i].name;
+				rank.id = json_food_list[i].id;
 				ul.appendChild(cloneLi);
 			}
 			for (var i = 0; i < number; i++) {

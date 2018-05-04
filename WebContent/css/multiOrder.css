@@ -96,6 +96,20 @@ padding-left: 5px;
 .glyphicon{
     color: #0089dc;
 }
+
+#result_table tr.hover{
+    background: #D9D9D9;
+}
+
+
+
+
+
+
+
+
+
+
 .recommand_food{
    /* background: #ffffff;*/
    
@@ -188,9 +202,10 @@ font-family: arial;
     width: 100%;
      border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
     display: flex;
     /*justify-content:space-between;*/
-    
+    overflow: auto;
 }
 svg{
 fill: rgb(135, 206, 235);
@@ -199,6 +214,9 @@ fill: rgb(135, 206, 235);
     color: rgb(135, 206, 235);
     padding-left: 15px;;
     width: 40%;
+}
+.glyphicon-shopping-cart{
+    font-size: 30px;
 }
 .amount-sum{
     margin:0 25px 0 5px;
@@ -211,5 +229,11 @@ fill: rgb(135, 206, 235);
      padding: 10px 0;
 }
 .btn-area{
-    padding: 10px 0;
+    height: 100%;
+    text-align: center;
+    padding: 3px 0;
+}
+#Go_btn{
+    background: #ffffff;
+    padding: 0px;
 }
