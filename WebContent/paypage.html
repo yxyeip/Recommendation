@@ -1,0 +1,34 @@
+    <!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <title>支付页面</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/multiOrder.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="pay_page">
+        <div class="pay_header" id="tips">
+            <span>请在30 分钟内进行支付，完成订单支付。 支付剩余时间：</span><span id="showtime">30分00秒</span>
+        </div>
+        <div class="pay_div">
+            <div id="orderIdDiv"> 订单号:<span id="orderId">11111</span></div>
+            <div>
+                <div>
+                    <div class="method">支持支付宝支付:<img src="img/alipaypcnew.png"></img>
+                    </div>
+                    <div class="payment-submit-area">
+                        <div id="amount">待支付金额￥<span id="amount-price">20.00</span></div>
+                        <div class="payment-submit"><a id="pay_btn">去付款</a></div>
+                        <div class="payment-order"><a>查看订单</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/cookie.js"></script>
+    <script src="js/paypage.js"></script>
+    </body>

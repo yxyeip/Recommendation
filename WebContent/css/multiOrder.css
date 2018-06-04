@@ -10,10 +10,11 @@ body{
     background: #f6f6f6;
     padding-top:10px;
     padding-left: 15px;
+    min-width: 980px;
 }
 .add_user{
     float: left;
-	width:400px;
+	width:300px;
     min-width: 300px;
     background: #f6f6f6;
 }
@@ -82,10 +83,12 @@ font-weight:900;
 }
 .sex{
 font-weight:300;
+font-style:oblique;
 }
 .birthday{
     font-weight:300;
-    
+    float:right;
+    font-style:oblique;
 }
 .operation{
 float: right;
@@ -101,6 +104,14 @@ padding-left: 5px;
     background: #D9D9D9;
 }
 
+#add_user_ok_btn{
+    background: #ffffff;
+    float: right;
+    color: #0089dc;
+}
+#add_user_ok_btn .glyphicon-ok{
+    color: #0089dc;
+}
 
 
 
@@ -108,12 +119,10 @@ padding-left: 5px;
 
 
 
-
-
-.recommand_food{
+#recommand_food,#confirmOrder{
    /* background: #ffffff;*/
    
-    margin-left: 415px;
+    margin-left: 315px;
 }
 .food_nav{
     padding-top:8px;
@@ -183,7 +192,11 @@ font-family: arial;
     height:100%;
 }
 
-
+.placeholder-img{
+    background: url(../img/placeholder.6b46696.png)  no-repeat;
+    width: 402px;
+    height: 304px;
+}
 
 
 
@@ -197,14 +210,16 @@ font-family: arial;
 .fixed-bottom {
     position: fixed;
     bottom: 0px;
+    /*left:315px;*/
+    margin-left: 315px;
     z-index: 9999;
     height: 40px;
-    width: 100%;
+   width: calc(100% - 330px);
      border-radius: 4px;
     box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
     background: #ffffff;
     display: flex;
-    /*justify-content:space-between;*/
+    justify-content:flex-end;
     overflow: auto;
 }
 svg{
@@ -213,27 +228,169 @@ fill: rgb(135, 206, 235);
 .shopCartIcon{
     color: rgb(135, 206, 235);
     padding-left: 15px;;
-    width: 40%;
+    /*width: 40%;*/
 }
 .glyphicon-shopping-cart{
     font-size: 30px;
 }
 .amount-sum{
     margin:0 25px 0 5px;
-    vertical-align: middle;
-    padding: 10px 0;
+    vertical-align: middle; 
+    padding: 10px;
+
 }
 
 .price-sum{
      margin:0 25px 0 5px;
-     padding: 10px 0;
+     padding: 10px;
 }
 .btn-area{
     height: 100%;
     text-align: center;
-    padding: 3px 0;
+    padding: 3px;
 }
 #Go_btn{
     background: #ffffff;
     padding: 0px;
+}
+
+/*confirm order*/
+.order_header{
+    width: 100%;
+    box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
+    height:30px; 
+    text-align: center;
+    padding-top: 6px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.to-left{
+    padding-left: 10px;
+    width: 50px;
+    float: left;
+}
+.ticket-age{
+        width: 100%;
+    height: 32px;
+    margin-top: -1px;
+    background: url(../img/order-bot-bg1.png) no-repeat;
+    background-size:100% 100%
+}
+
+.remark_div{
+    width:60%;
+}
+.control-label{
+    min-width: 130px;
+}
+.form-horizontal .form-group{
+    box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
+    margin: 0px;
+    height:45px;
+}
+#remark-group{
+    height:45px;
+    padding-top:10px;
+}
+.form-horizontal .food_name_label{
+text-align: left;
+font-weight: normal;
+}
+.form-horizontal .food_number_lable{
+    font-weight: normal;
+}
+.form-horizontal .food_t_price{
+    font-weight: normal;
+    color: #99CCCC;
+}
+
+/*pay order*/
+body{
+    background: #f6f6f6; 
+}
+
+#tips{
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.1);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+#showtime{
+    color: #fb7403;
+}
+
+.pay_header{
+    box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
+    margin: 10px 50px 10px 50px;
+}
+.pay_div{
+    box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
+    margin: 10px 50px;
+    height:500px;
+}
+#orderIdDiv{
+    box-shadow: 0 0 3px 0 rgba(26,26,26,.1);
+    background: #ffffff;
+    height:50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.method{
+        cursor: pointer;
+        border-bottom: 1px dashed #e5e5e5;
+        padding-left: 50px;
+        padding-right: 50px;
+        height:50px;
+        line-height: 50px;
+}
+
+.payment-submit-area{
+    float: right;
+    margin-top: 50px;
+    margin-right:50px;
+    width: 100%;
+    height:100%;
+}
+#amount {
+    text-align: right;
+    font-size: 14px;
+    color: #f60;
+}
+#amount-price {
+    font-size: 30px;
+    font-family: arial,sans-serif;
+}
+.payment-submit {
+    float: right;
+    margin-top: 14px;
+}
+#pay_btn{
+    background-color: #f90;
+    border-radius: 100px;
+    background-image: linear-gradient(180deg,#ffa114,#f59300);
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 36px;
+    border: none;
+}
+.payment-order{
+    float: right;
+    margin-top: 14px;
+    line-height: 40px;
+    margin-right: 20px;
+}
+
+.payment-order a {
+    font-size: 12px;
+    color: #666;
 }

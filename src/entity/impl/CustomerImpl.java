@@ -8,7 +8,7 @@ import java.util.Date;
 import entity.api.Customer;
 
 public class CustomerImpl implements Customer {
-	private int Id;
+	private long Id;
 	private String name;
 	private String password;
 	private Boolean sex;//is male
@@ -27,12 +27,12 @@ public class CustomerImpl implements Customer {
 		this.height=height;
 	}
 	@Override
-	public int getId() {
+	public long getId() {
 		return Id;
 	}
 
 	@Override
-	public void setId(int id) {
+	public void setId(long id) {
 		this.Id=id;
 	}
 

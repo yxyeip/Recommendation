@@ -22,6 +22,11 @@ public class Pearson {
         double sum = 0.0;
         double mean1 = mean(l1);
         double mean2 = mean(l2);
+        int min=l1.size()>l2.size()?l2.size():l1.size();
+        if(l1.size()!=l2.size()||l1.size()==0) {
+        	System.out.println(l1);
+        	System.out.println(l2);
+        }
         for(int i = 0; i< l1.size(); i++){
             sum+= (l1.get(i)-mean1)*(l2.get(i)-mean2);
         }

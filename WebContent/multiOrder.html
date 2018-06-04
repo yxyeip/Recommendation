@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>多人订餐页面</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/multiOrder.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
@@ -29,7 +29,7 @@
                         <li><a href="" class="item nav_item">多人订餐</a></li>
                     </ul>
                 </li>
-                <li><a href="#order" class="item">我的订单</a></li>
+                <li><a href="order.html" class="item">我的订单</a></li>
                 <li><a href="info.html" class="item">个人信息</a></li>
             </ul>
             <div class="login" id="logCheck">
@@ -43,7 +43,7 @@
         <div class="add_user">
             <div id="find_user">
                 <div class="table_row">
-                    <div class="search_bar">
+                    <div class="search_bar" style="display:block">
                         <input type="text" class="form-control" placeholder="查找与你一起进餐的用户" id="input_find" />
 
 
@@ -61,7 +61,7 @@
                     </div>
                     <div class="userInfo">
                         <p class="userName">userName1</p>
-                        <span class="sex">男</span><span class="birthday">      1996-02-24</span>
+                        <span class="sex">男</span> <span class="birthday">      1996-02-24</span>
                     </div>
                     <div class="operation">
                         <span class="glyphicon glyphicon-remove remove_user" aria-hidden="true"></span>
@@ -71,11 +71,15 @@
                 <div class="userCard"></div>
                 <div class="userCard"></div>
             </div>
+            <button type="button" class="btn btn-default" aria-label="Right Align" id="add_user_ok_btn" flag="true"> 
+                选好了！
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </button>
         </div>
 
-        <div class="recommand_food">
+        <div id="recommand_food">
             <div class="food_main">
-                <div class="table_div">
+                <div class="table_div" style="display:none">
                     <table class="menu_table">
                         <thead>
                             <tr>
@@ -102,28 +106,27 @@
                             </tr>
                         </thead>
                         <tbody id="menu_tbody">
-                            <tr id="foodName">
+                            <tr id="foodName" class="food_row">
                                 <th class="menu_check">
                                     <div>
                                         <input class="check_item" id="check_" + "foodName" type="checkbox" name="select-all" value="true">
                                     </div>
                                 </th>
                                 <th class="menu_img">
-                                    <img class="img-rounded"src="img/food1.jpg" height="60px">
+                                    <img class="img-rounded" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1526039452&di=22e1f5c67d6c3bdca2c57f37e0c6b278&src=http://imgsrc.baidu.com/imgad/pic/item/f603918fa0ec08fa1434c73a53ee3d6d55fbda73.jpg"
+                                        height="60px">
                                 </th>
                                 <th class="menu_des">
                                     <div class="food_content">
-                                        <span class="food_name"> 
-                                        小葱拌豆腐
-                                    </span>
+                                        <span class="food_name">美味素鸡</span>
                                         <span class="food_price" style="display: none;"> 
                                         <span>¥</span>
-                                        <strong class="price">39.10</strong>
+                                        <strong class="price">15.00</strong>
                                         </span>
                                     </div>
                                     <div class="food_description">
                                         <p>
-                                            配料：小葱（10g）豆腐（300g）
+                                            配料：素鸡（150g）香菜（20g）
                                         </p>
                                     </div>
                                 </th>
@@ -133,7 +136,7 @@
                                 <th class="menu_price">
                                     <div class="price_txt">
                                         <span>¥</span>
-                                        <strong>39.10</strong>
+                                        <strong>15.00</strong>
                                     </div>
                                 </th>
                                 <th class="menu_operation">
@@ -142,72 +145,61 @@
                                     </div>
                                 </th>
                             </tr>
-                            <tr id="foodName">
-                                <th class="menu_check">
-                                    <div>
-                                        <input class="check_item" id="check_" + "foodName" type="checkbox" name="select-all" value="true">
-                                    </div>
-                                </th>
-                                <th class="menu_img">
-                                    <img class="img-rounded" src="img/food2.jpg" height="60px">
-                                </th>
-                                <th class="menu_des">
-                                    <div class="food_content">
-                                        <span class="food_name"> 
-                                        小葱拌豆腐
-                                    </span>
-                                        <span class="food_price" style="display: none;"> 
-                                        <span>¥</span>
-                                        <strong class="price">39.10</strong>
-                                        </span>
-                                    </div>
-                                    <div class="food_description">
-                                        <p>
-                                            配料：小葱（10g）豆腐（300g）
-                                        </p>
-                                    </div>
-                                </th>
-                                <th class="menu_number">
-                                    <input class="input_menu_number" name="number_" + "foodName" type="number" value=1 min="1"></input>
-                                </th>
-                                <th class="menu_price">
-                                    <div class="price_txt">
-                                        <span>¥</span>
-                                        <strong>39.10</strong>
-                                    </div>
-                                </th>
-                                <th class="menu_operation">
-                                    <div class="menu_operation_div">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </th>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
+                <div class="table_div">
+                    <div class="placeholder-img"></div>
+                </div>
             </div>
+        </div>
 
-            <div class="fixed-bottom">
-                <div class="shopCartIcon ">
-                    
+        <div id="confirmOrder" style="display:none">
+            <div class="order_header"> <span class="glyphicon glyphicon-chevron-left to-left" aria-hidden="true" id="to_recommand_page"></span> 确认订单</div>
+            <form class="form-horizontal">
+                <div class="form-group" id="confirm_item_header">
+                    <label class="col-sm-6 control-label food_name_label">菜品</label>
+                    <label class="col-sm-3 control-label food_number_lable">数量</label>
+                    <label class="col-sm-3 control-label food_t_price_lable">小计</label>
                 </div>
-                <div class="amount-sum">
-                    <span class="txt">已选商品 </span><em id="J_SelectedItemsCount">24</em><span class="txt"> 件</span>
+                <div class="item_list">
+                    <div class="form-group confirm_item" id="confirm_item1" style="display:none">
+                        <label class="col-sm-6 control-label food_name_label">小凉菜</label>
+                        <label class="col-sm-3 control-label food_number_lable">2</label>
+                        <label class="col-sm-3 control-label food_t_price_lable">￥10</label>
+                    </div>
                 </div>
-                <div class="price-sum">
-                    <span class="txt">合计：</span><strong class="total_price"><em id="J_Total" class="price_txt"><span class="total-symbol">&nbsp;￥</span>3079.91</em></strong></div>
-                <div class="btn-area">
-                   <!-- <a href="javascript:void(0)" id="J_Go" class="submit-btn">-->
-                       结&nbsp;算
-                       <button type="button" class="btn" id="Go_btn">
+                <div class="form-group" id="remark-group">
+                    <label for="remark" class="col-sm-2 control-label">给商家留言：</label>
+                    <div class="col-sm-10 remark_div">
+                        <input type="text" class="form-control" id="remark" name="remark" placeholder="不要辣多放盐等口味要求">
+                    </div>
+                </div>
+            </form>
+            <div class="ticket-age"></div>
+        </div>
+
+        <div class="fixed-bottom">
+            <div class="shopCartIcon ">
+            </div>
+            <div class="amount-sum">
+                <span class="txt">已选商品 </span><em id="J_SelectedItemsCount">24</em><span class="txt"> 件</span>
+            </div>
+            <div class="price-sum">
+                <span class="txt">合计：</span><strong class="total_price"><em id="J_Total" class="price_txt"><span class="total-symbol">&nbsp;￥</span>3079.91</em></strong></div>
+            <div class="btn-area">
+                <!-- <a href="javascript:void(0)" id="J_Go" class="submit-btn">-->
+                结&nbsp;算
+                <button type="button" class="btn" id="Go_btn">
                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                         <b></b>
-                   </button>
-                        </div>
+                </button>
             </div>
-
         </div>
-            <script src="js/multiOrder.js"></script>
+    </div>
+    <script src="js/cookie.js"></script>
+    <script src="js/multiOrder.js"></script>
 </body>
 
 </html>

@@ -62,7 +62,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("state", "password error");
                 session.setAttribute("userName", userName);
                 //response.sendRedirect(request.getContextPath()+"/login.jsp");
-                response.getWriter().print("密码错误！");
+                //response.getWriter().print("密码错误！");
+                response.sendRedirect(request.getContextPath()+"/login.html");
+                response.getWriter().append("alert(password error!)");
                 System.out.println("password error");
             }else if (result==1){
                 // 

@@ -52,9 +52,13 @@ public class SparsityRemoval {
 	}
 	
 	private static TreeMap<String, Double> kfamiliarCustomer(String userName,List<Double> ranklist1) {
-		HashMap<String, Double> userFamiliar=new HashMap<String,Double>();		
+		//HashMap<String, Double> userFamiliar=new HashMap<String,Double>();		
+		TreeMap<String, Double>userFamiliar=new TreeMap<String,Double>();
 		List<String>userNames=CustomerDao.getAllCustomerNames();
 		for (String name : userNames) {
+			if(name.equals(userName)) {
+				continue;
+			}
 			List<Double> ranklist2=CustomerFoodRankDao.UserRankList(name);
 			//calculate 
 			Double similarity=Pearson.pearson(ranklist1, ranklist2);

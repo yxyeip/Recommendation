@@ -40,4 +40,22 @@ public class FoodImpl implements Food {
 	public String  getKind() {
 		return kind;
 	}
+	@Override
+	public void setId(int id) {
+		this.Id=id;
+		
+	}
+	@Override
+	public void setName(String name) {
+		this.name=name;		
+	}
+	@Override
+	public void setPrice(BigDecimal price) {
+		this.price=price;
+	}
+	@Override
+	public void setDescription(String description) {
+		this.description=description;
+		
+	}
 }

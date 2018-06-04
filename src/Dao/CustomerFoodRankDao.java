@@ -30,7 +30,7 @@ public boolean insertOrUpdate() {
 			if(DBconn.addUpdDel(updateSql)==0)
 				return false;	
 		}else {//insert
-			String insertSql=String.format("INSERT INTO Recommand..evaluation (user_name, food_id,rank) VALUES ('%s', '%d',%d)", userName,foodId,rank);
+			String insertSql=String.format("INSERT INTO Recommand..evaluation (user_name, food_id,rank) VALUES ('%s', %d,%d)", userName,foodId,rank);
 			if(DBconn.addUpdDel(insertSql)==0)
 				return false;	
 		}
@@ -68,11 +68,15 @@ public static List<Double> UserRankList(String userName){
 	int i=0;
 	try {
 		while(rSet.next()) {
-			if(rSet.getInt("food_id")>i) {//没有评分
-				rankList.add(0.0);				
+			while(rSet.getInt("food_id")>i) {//没有评分
+				rankList.add(0.0);
+				i++;
 			}
 			rankList.add((double) rSet.getInt("rank"));
 			i++;
+		}
+		for(int j=i;j<337;j++) {
+			rankList.add(0.0);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();

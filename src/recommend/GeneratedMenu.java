@@ -7,7 +7,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+
+import com.sun.xml.internal.stream.Entity;
 
 import Dao.CustomerFoodRankDao;
 import Dao.FoodDao;
@@ -21,7 +24,7 @@ public GeneratedMenu(List<Customer>customers) {
 	this.customers=customers;	
 }
 //return food's id list
-public List<Integer> GeneratedMenu(){
+public  List<Integer> GeneratedMenu(){
 	List<Integer>menuList=new ArrayList<Integer>();
 	List<List< Double>> allRankList=new LinkedList<List< Double>>();
 	for (Customer customer : customers) {
@@ -34,8 +37,8 @@ public List<Integer> GeneratedMenu(){
 	//標準熱量
 	int sCalorificValue =Calorific.getStandardCalorificValue(customers);
 	//用戶喜愛值之和
-	HashMap<Integer,Double> sumRank=new HashMap<Integer,Double>();
-	for(int i=0;i<allRankList.get(i).size();i++) {
+	TreeMap<Integer,Double> sumRank=new TreeMap<Integer,Double>();	
+	for(int i=0;i<337;i++) {
 		double sum=0.0;
 		for (List<Double> rankList : allRankList) {
 			sum+=rankList.get(i);
@@ -44,13 +47,13 @@ public List<Integer> GeneratedMenu(){
 	}
 	//從大到小排序
 	MapUtil<Integer,Double> mapUtil=new MapUtil<Integer,Double>();
-	TreeMap <Integer,Double>sortedSumRank=mapUtil.sortMap(sumRank);
-	
+	List <Entry<Integer,Double>> sortedSumRank=mapUtil.sortByValue(sumRank);
+	//sumRank=mapUtil.sortByValue(sumRank);
 	Map<Integer, Integer> calorificMap=FoodDao.getCalorificMap();
 	int calorific=0;
-	 Iterator<Integer> it = sortedSumRank.keySet().iterator();  
+	 Iterator<Entry<Integer, Double>> it = sortedSumRank.iterator();  
      while (it.hasNext()) { 
-    	 Integer food_id=it.next();
+    	 Integer food_id=it.next().getKey();
     	 calorific+=calorificMap.get(food_id);
     	 if(calorific<sCalorificValue) {
     		 menuList.add(food_id);
@@ -58,7 +61,6 @@ public List<Integer> GeneratedMenu(){
     		 break;
     	 }
      }
-		
      return menuList;
 }
 

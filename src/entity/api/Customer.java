@@ -5,8 +5,8 @@ import java.util.Date;
 public interface Customer {
 	
 	//int Id;
-	public int getId();
-	public void setId(int Id);
+	public long getId();
+	public void setId(long Id);
 	
 	//String name;
 	public String getName();

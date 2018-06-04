@@ -15,5 +15,9 @@ public interface Food {
 	public String getDescription();
 	//public void 
 	public String getKind();
+	public void setId(int id);
+	public void setName(String name);
+	public void setPrice(BigDecimal price);
+	public void setDescription(String description);
 
 }

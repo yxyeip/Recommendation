@@ -13,51 +13,54 @@ import entity.api.Customer;
 import entity.impl.CustomerImpl;
 import sun.awt.image.ImageWatched.Link;
 import util.*;
+
 public class CustomerDao {
-	//1成功0失败2用户不存在
+	// 1成功0失败2用户不存在
 	public static int login(String name, String pwd) {
-		String sql=String.format("select top 1 * from Recommand..customer where name = '%s'", name);	
+		String sql = String.format("select top 1 * from Recommand..customer where name = '%s'", name);
 		DBconn.init();
-		ResultSet resultSet=DBconn.selectSql(sql);
-		if(resultSet!=null){
+		ResultSet resultSet = DBconn.selectSql(sql);
+		if (resultSet != null) {
 			String password = "";
 			try {
-				 if (resultSet.next()){
-					 password = resultSet.getString("password");
-				 }
+				if (resultSet.next()) {
+					password = resultSet.getString("password");
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
+			} finally {
 				DBconn.closeConn();
 			}
-			if(password.equals(PasswordUtil.encript(pwd))) {
+			if (password.equals(PasswordUtil.encript(pwd))) {
 				return 1;
-			}else {
+			} else {
 				return 0;
 			}
-		}else {
-		return 2;
+		} else {
+			return 2;
 		}
 	}
 
 	public static boolean logon(Customer user) {
-		String sql=String.format("Select * from Recommand..customer where name = '%s'", user.getName());
+		String sql = String.format("Select * from Recommand..customer where name = '%s'", user.getName());
 		DBconn.init();
 		try {
-			if(!DBconn.selectSql(sql).next())
-			{
-				//插入
-				sql=String.format("insert into Recommand..customer(name,password,sex,birthday,height,weight) values ('%s','%s',%d,'%s',%d,%d)", 
-						user.getName(),user.getPassword(),user.getSex()==false?0:1,user.getBirthday(),user.getHeight(),user.getWeight());
-				if(DBconn.addUpdDel(sql)==1) return true;
+			if (!DBconn.selectSql(sql).next()) {
+				// 插入
+				sql = String.format(
+						"insert into Recommand..customer(name,password,sex,birthday,height,weight) values ('%s','%s',%d,'%s',%d,%d)",
+						user.getName(), user.getPassword(), user.getSex() == false ? 0 : 1, user.getBirthday(),
+						user.getHeight(), user.getWeight());
+				if (DBconn.addUpdDel(sql) == 1)
+					return true;
 			}
 		} catch (Exception e) {
 			System.out.println("插入出错 ");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBconn.closeConn();
-		}	
-		return false;		
+		}
+		return false;
 	}
 
 	public List<Customer> getUserAll() {
@@ -69,36 +72,35 @@ public class CustomerDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-/*
-	private int Id;
-	private String name;
-	private String password;
-	private Boolean sex;
-	private Date birthday;
-	private int weight;
-	private int height;*/
+	/*
+	 * private int Id; private String name; private String password; private Boolean
+	 * sex; private Date birthday; private int weight; private int height;
+	 */
 
-	public static boolean update(String name, String pwd, Boolean sex,Date birthday, int height, int weight){
-		String sql=String.format("Select * from Recommand..customer where name = '%s'", name);
+	public static boolean update(String name, String pwd, Boolean sex, Date birthday, int height, int weight) {
+		String sql = String.format("Select * from Recommand..customer where name = '%s'", name);
 		DBconn.init();
-		if(DBconn.selectSql(sql)!=null)
-		{
-			sql=String.format("update Recommand..customer set password='%s' sex=%b birthday=%tx height =%d weight =&d where name=%s",pwd,sex,birthday,height,weight);
-			if(DBconn.addUpdDel(sql)==1)
-			return true;
+		if (DBconn.selectSql(sql) != null) {
+			sql = String.format(
+					"update Recommand..customer set password='%s' sex=%b birthday=%tx height =%d weight =&d where name=%s",
+					pwd, sex, birthday, height, weight);
+			if (DBconn.addUpdDel(sql) == 1)
+				return true;
 		}
 		return false;
 	}
+
 	public static Customer getCustomer(String name) {
-		Customer customer=new CustomerImpl();
-		String sql=String.format("Select * from Recommand..customer where name = '%s'", name);
+		Customer customer = new CustomerImpl();
+		String sql = String.format("Select * from Recommand..customer where name = '%s'", name);
 		DBconn.init();
-		ResultSet rSet=DBconn.selectSql(sql);
-		if(rSet==null) {
+		ResultSet rSet = DBconn.selectSql(sql);
+		if (rSet == null) {
 			return null;
-		}else {
+		} else {
 			try {
-				if(rSet.next()) {
+				if (rSet.next()) {
+					customer.setId(rSet.getLong("id"));
 					customer.setName(name);
 					customer.setPassword("");
 					customer.setSex(rSet.getBoolean("sex"));
@@ -107,43 +109,44 @@ public class CustomerDao {
 					customer.setHeight(rSet.getInt("height"));
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally {
+			} finally {
 				DBconn.closeConn();
 			}
 			return customer;
 		}
-		
+
 	}
+
 	public static List<String> getAllCustomerNames() {
-		List<String> userNames=new LinkedList<String>();
-		String sql="Select name from Recommand..customer";
+		List<String> userNames = new LinkedList<String>();
+		String sql = "Select name from Recommand..customer";
 		DBconn.init();
-		ResultSet rSet=DBconn.selectSql(sql);
+		ResultSet rSet = DBconn.selectSql(sql);
 		try {
-			while(rSet.next()) {
+			while (rSet.next()) {
 				userNames.add(rSet.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBconn.closeConn();
 		}
 		return userNames;
 	}
-	public static List<String> getCustomerNameAcorrdingInput(String userName){
-		List<String>userNames=new LinkedList<String>();
-		String sql=String.format("select * from Recommand..customer where name like '%s'", "%"+userName+"%");
+
+	public static List<String> getCustomerNameAcorrdingInput(String userName) {
+		List<String> userNames = new LinkedList<String>();
+		String sql = String.format("select * from Recommand..customer where name like '%s'", "%" + userName + "%");
 		DBconn.init();
-		ResultSet rSet=DBconn.selectSql(sql);
+		ResultSet rSet = DBconn.selectSql(sql);
 		try {
-			while(rSet.next()) {
+			while (rSet.next()) {
 				userNames.add(rSet.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBconn.closeConn();
 		}
 		return userNames;
