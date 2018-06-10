@@ -40,6 +40,12 @@ function checkUserState() {
 
 $("li.food_kind a").click(
 	function(){
+		//ActiveXObject
+		for (var i = 0; i < 13; i++) {
+            var a = document.getElementsByClassName("food_kind")[i].getElementsByTagName("a")[0];
+            a.className = "";
+        }
+		this.className="active2";
 		ShowFood($(this).attr("id"),applyRank);
 		
 	}
@@ -115,7 +121,7 @@ function ShowFood(kind,callback) {
 				var rank = document.createElement("div");
 				rank.setAttribute("class","rank");
 				rank.setAttribute("data_score",json_food_list[i].rank == null ? 0 : json_food_list[i].rank);
-				console.log(rank.getAttribute("data_score"));
+				//console.log(rank.getAttribute("data_score"));
 				//除去之前的rank标签
 				var inner=cloneLi.getElementsByClassName("food_inner")[0];
 				var remove=inner.getElementsByClassName("rank")[0];

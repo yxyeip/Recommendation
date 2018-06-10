@@ -1,4 +1,5 @@
 function applyRank() {
+
     $(".rank").raty({
         hints: ['1', '2', '3', '4', '5'],
         path: "./raty/images",
@@ -8,18 +9,21 @@ function applyRank() {
         halfShow: false,
         click: function (score, evt) {
             //alert($(this).attr('data_score'));
+            var parent = $(this).parent().parent().parent().parent();
+            var id = parent.attr("id");
+
             $.ajax({
-                url: "UploadRank",
+                url: "RankOrder",
                 type: "post",
                 //dataType: "json",
                 data: {
                     score: score,
-                    id: $(this).attr('id')
+                    OrderId: id
                 },
                 success: function (response) {
-
-                    alert(response);
-
+                    if (response == "0") {
+                        alert(response);
+                    }
                 },
                 error: function () {
 
@@ -36,6 +40,7 @@ function applyRank() {
 
 $(document).ready(
     function () {
+        //if()
         showOrder("all", applyRank);
         document.getElementById("all").className = "active";
     }
@@ -43,12 +48,12 @@ $(document).ready(
 
 $("#order-nav ul li a").click(
     function () {
-        showOrder($(this).attr("id"), applyRank);
         for (var i = 0; i < 3; i++) {
             var li = document.getElementById("order_ul").children[i];
             li.firstChild.className = "";
         }
         $(this).className = "active";
+        showOrder($(this).attr("id"), applyRank);
     }
 );
 
@@ -82,7 +87,8 @@ function showOrder(i, callback) {
             parentNode.innerText = "";
             //生成order节点
             for (var i = 0; i < orderList.length; i++) {
-                // orderListItem
+                appendOrder(orderList[i], parentNode);
+                /*// orderListItem
                 var orderListItem = document.createElement("div");
                 orderListItem.className = "orderListItem";
                 orderListItem.id = orderList[i].id;
@@ -124,12 +130,17 @@ function showOrder(i, callback) {
                     if (orderList[i].rate == null || orderList[i].rate == 0) {
                         var txt2 = document.createTextNode("请选择您对订单自动生成的满意度:");
                         rankandtxt.appendChild(txt2);
+                        var rate = document.createElement("span");
+                        rate.className = "rank";
+                        rate.setAttribute("data_score", 0);
                     } else {
                         var txt2 = document.createTextNode("您对订单自动生成的满意度：");
                         rankandtxt.appendChild(txt2);
+                        var rate = document.createElement("span");
+                        rate.className = "rank";
+                        rate.setAttribute("data_score", orderList[i].rate);
                     }
-                    var rate = document.createElement("span");
-                    rate.className = "rank";
+
                     rankandtxt.appendChild(rate);
                 } else {
                     var go_pay = document.createElement("a");
@@ -169,13 +180,140 @@ function showOrder(i, callback) {
                     food_t_price_lable.innerText = "￥" + orderItems[j].food.price;
                     orderItem.appendChild(food_t_price_lable);
 
-                }
+                }*/
             }
             callback();
         }
     })
 }
 
+function appendOrder(order, parentNode) {
+    // orderListItem
+    var orderListItem = document.createElement("div");
+    orderListItem.className = "orderListItem";
+    orderListItem.id = order.id;
+    parentNode.appendChild(orderListItem);
+    // orderhead
+    var orderhead = document.createElement("div");
+    orderhead.className = "orderhead";
+    orderListItem.appendChild(orderhead);
+
+    //head_first_line
+    var head_first_line = document.createElement("div");
+    head_first_line.className = "head_first_line";
+    orderhead.appendChild(head_first_line);
+    // orderTime
+    var orderTime = document.createElement("span");
+    orderTime.className = "orderTime";
+    orderTime.innerText = order.time;
+    head_first_line.appendChild(orderTime);
+    // orderId
+    var txt = document.createTextNode("订单号:");
+    head_first_line.appendChild(txt);
+    var orderId = document.createElement("span");
+    orderId.className = "orderId";
+    orderId.innerText = order.id;
+    head_first_line.appendChild(orderId);
+
+
+    //head_second_line
+    var head_second_line = document.createElement("div");
+    head_second_line.className = "head_second_line";
+    orderhead.appendChild(head_second_line);
+
+    //推荐满意度
+    if (order.state == 1) {
+        //rateandtxt
+        var rankandtxt = document.createElement("span");
+        rankandtxt.className = "rateandtxt";
+        head_second_line.appendChild(rankandtxt);
+        if (order.rate == null || order.rate == 0) {
+            var txt2 = document.createTextNode("请选择您对订单自动生成的满意度:");
+            rankandtxt.appendChild(txt2);
+            var rate = document.createElement("span");
+            rate.className = "rank";
+            rate.setAttribute("data_score", 0);
+        } else {
+            var txt2 = document.createTextNode("您对订单自动生成的满意度：");
+            rankandtxt.appendChild(txt2);
+            var rate = document.createElement("span");
+            rate.className = "rank";
+            rate.setAttribute("data_score", order.rate);
+        }
+
+        rankandtxt.appendChild(rate);
+    } else {
+        var go_pay = document.createElement("a");
+        go_pay.className = "go_pay";
+        go_pay.innerText = "未支付？去支付";
+        head_second_line.appendChild(go_pay);
+    }
+
+    // t_price
+    var t_price = document.createElement("span");
+    t_price.className = "t_price";
+    t_price.innerText = "总价：￥" + order.price;
+    head_second_line.appendChild(t_price);
+
+    var orderItems = order.orderItems;
+    var orderItemsNode = document.createElement("div");
+    orderItemsNode.className = "orderItems";
+    orderListItem.appendChild(orderItemsNode);
+    //生成orderitem节点
+    for (var j = 0; j < orderItems.length; j++) {
+        var orderItem = document.createElement("div");
+        orderItem.className = "orderItem";
+        orderItemsNode.appendChild(orderItem);
+
+        var food_name_label = document.createElement("span");
+        food_name_label.className = "col-sm-6 control-label food_name_label";
+        food_name_label.innerText = orderItems[j].food.name;
+        orderItem.appendChild(food_name_label);
+
+        var food_number_lable = document.createElement("span");
+        food_number_lable.className = "col-sm-3 control-label food_number_lable";
+        food_number_lable.innerText = orderItems[j].foodNumber;
+        orderItem.appendChild(food_number_lable);
+
+        var food_t_price_lable = document.createElement("span");
+        food_t_price_lable.className = "col-sm-3 control-label food_t_price_lable";
+        food_t_price_lable.innerText = "￥" + orderItems[j].food.price;
+        orderItem.appendChild(food_t_price_lable);
+
+    }
+
+}
+
+
+function findOrderById() {
+    var id = document.getElementById("input_find").value;
+    $.ajax({
+        type: 'Post',
+        //async: false, //同步执行，不然会有问题
+        url: "FindOrder",
+        data: {
+            "method": "id",
+            "orderId": id
+        },
+        dataType: "json",
+        //contentType: "application/json; charset=utf-8",
+        error: function (msg) {//请求失败处理函数
+            alert("服务器出错");
+        },
+        success: function (data) { //请求成功后处理函数
+            var order = eval(data);
+            var parentNode = document.getElementsByClassName("orderList")[0];
+            //删除原来的所有子节点
+            var len = parentNode.childNodes.length;
+            for (var m = 0; m < len; m++) {
+                parentNode.removeChild(parentNode.firstChild);
+            }
+            parentNode.innerText = "";
+            appendOrder(order,parentNode);
+            applyRank();
+        }
+    })
+}
 /*
 function showOrder( i,callback){
  $.ajax({

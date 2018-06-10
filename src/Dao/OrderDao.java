@@ -134,10 +134,10 @@ public class OrderDao {
 	}
 
 	// change order
-	public boolean rateOrder(int rate) {
+	public boolean rankOrder(int rate) {
 		// if order is not complete
 		DBconn.init();
-		String sql = String.format("select * from Recommand..f_order where state=0 and id='%s'", order.getId());
+		String sql = String.format("select * from Recommand..f_order where state=1 and id='%s'", order.getId());
 		ResultSet rSet = DBconn.selectSql(sql);
 		try {
 			if (rSet.next()) {
@@ -216,5 +216,33 @@ public class OrderDao {
 			DBconn.closeConn();
 		}
 		return orderItems;
+	}
+	public static Order getOrderById(String id) {
+		Order order=new OrderImpl();
+		String sql=String.format("select * from Recommand..f_order where id='%s'", id);
+		DBconn.init();
+		ResultSet rSet=DBconn.selectSql(sql);
+		try {
+			if(rSet.next()) {
+				Set <OrderItem> orderItems=getFoodItemsByOrderId(rSet.getString("id"));
+				order.setId(rSet.getString("id"));
+				order.setOrderItems(orderItems);
+				order.setState(rSet.getBoolean("state"));
+				((OrderImpl)order).price();
+				order.setRate(rSet.getInt("rate"));
+				order.setRemark(rSet.getString("remark"));
+				//Date time=rSet.getDate("time");
+				Date time=rSet.getTimestamp("time");
+				order.setTime(time);
+			}else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			DBconn.closeConn();
+		}
+		return order;
 	}
 }
