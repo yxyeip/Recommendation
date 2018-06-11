@@ -9,8 +9,11 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
 
 import com.google.gson.Gson;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 public class CookieUtil{
     public static Cookie getCookieByName(HttpServletRequest request, String name) {
@@ -26,7 +29,7 @@ public class CookieUtil{
      * 将cookie封装到Map里面
      * 
      * @param request
-     * @return
+     * @author ye xiuyun
      */
     private static Map<String, Cookie> ReadCookieMap(HttpServletRequest request) {
         Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
@@ -46,7 +49,7 @@ public class CookieUtil{
      *            servlet请求
      * @param value
      *            保存值
-     * @author jxf
+     * @author ye xiuyun
      */
     public static HttpServletResponse setCookie(HttpServletResponse response, String name, String value,int time) {
         // new一个Cookie对象,键值对为参数
@@ -64,6 +67,21 @@ public class CookieUtil{
         response.addCookie(cookie); // addCookie后，如果已经存在相同名字的cookie，则最新的覆盖旧的cookie
         return response;
     }
-
+    public static void deleteCookie(HttpServletRequest request,HttpServletResponse response, String cookieName) {
+    	Cookie[] cookies = request.getCookies();  
+        if (null==cookies) {  
+            System.out.println("没有cookie==============");  
+        } else {  
+            for(Cookie cookie : cookies){  
+                if(cookie.getName().equals(cookieName)){  
+                    cookie.setValue(null);  
+                    cookie.setMaxAge(0);// 立即销毁cookie  
+                    cookie.setPath("/");  
+                    System.out.println("被删除的cookie名字为:"+cookie.getName());  
+                    response.addCookie(cookie);   
+                }  
+            }  
+        }  
+    }
 
 }

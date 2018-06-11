@@ -36,13 +36,20 @@ function applyRank() {
         }
     });
 }
-
-
+checkState();
+function checkState() {
+    var userName = cookieUtil.getCookie("userName");
+    var state = cookieUtil.getCookie("state");
+    if (state != "login" && state != "logon") {
+        //重定向
+        window.location.href = "login.html";
+        return;
+    }
+}
 $(document).ready(
     function () {
-        //if()
-        showOrder("all", applyRank);
         document.getElementById("all").className = "active";
+        showOrder("all", applyRank);
     }
 );
 
@@ -309,7 +316,7 @@ function findOrderById() {
                 parentNode.removeChild(parentNode.firstChild);
             }
             parentNode.innerText = "";
-            appendOrder(order,parentNode);
+            appendOrder(order, parentNode);
             applyRank();
         }
     })

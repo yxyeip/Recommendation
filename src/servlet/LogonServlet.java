@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import Dao.CustomerDao;
 import entity.api.Customer;
 import entity.impl.CustomerImpl;
+import util.CookieUtil;
 import util.PasswordUtil;
 
 /**
@@ -58,6 +59,8 @@ public class LogonServlet extends HttpServlet {
 		if(CustomerDao.logon(customer)) {
 			httpSession.setAttribute("state", "log on");
 			httpSession.setAttribute("userName", name);
+			CookieUtil.setCookie(response, "userName", name, 7*24*60*60);
+			CookieUtil.setCookie(response, "state", "logon", -1);
 			response.sendRedirect("./main.html");
 		}else {
 			httpSession.setAttribute("state", "log on failed");

@@ -9,49 +9,42 @@ function toLogonPage() {
 }
 
 function checkUserState() {
-	var xmlhttp;
-	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp = new XMLHttpRequest();
-	}
-	else {// code for IE6, IE5
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function () {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			//将 JSON 文本转换为 JavaScript 对象
-			var json_userstate = eval("(" + xmlhttp.responseText + ")");
-			var state = json_userstate.state;
-			var logCheck = document.getElementById("logCheck");
-			if (state == "log in") {
-				var userName = json_userstate.username;
-				logCheck.innerHTML = "<form action='LogoutServlet' method='post'>" +
-					"<button type='submit' class='btn  navbar-btn'  id='logout'> " + userName
-					+ "，退出</button>" +
-					"</form>";
-				login = true;
-			} else {
-				logCheck.innerHTML = "<button type='button' class='btn  navbar-btn' onclick='toLoginPage()' id='logon'> 登录</button>" + " " + "<button type='button' class='btn  navbar-btn' onclick='toLogonPage()' id='logon'>注册</button>";
-			}
+	var logCheck = document.getElementById("logCheck");
+
+	var userName = cookieUtil.getCookie("userName");
+	var state = cookieUtil.getCookie("state");
+	if (userName != null) {
+		if (state == "login" || state == "logon") {	
+			logCheck.innerHTML = "<form action='LogoutServlet' method='post'>" +
+				"<button type='submit' class='btn  navbar-btn'  id='logout'> " + userName
+				+ "，退出</button>" +
+				"</form>";
+			login = true;
+		} else {
+			logCheck.innerHTML = "<button type='button' class='btn  navbar-btn' onclick='toLoginPage()' id='logon'>您好" + userName + ",请登录</button>";
 		}
+	} else {
+		logCheck.innerHTML = "<button type='button' class='btn  navbar-btn' onclick='toLoginPage()' id='logon'> 登录</button>" + " " + "<button type='button' class='btn  navbar-btn' onclick='toLogonPage()' id='logon'>注册</button>";
 	}
-	xmlhttp.open("POST", "CheckUserState", true);
-	xmlhttp.send();
+
+
+
 }
 
 $("li.food_kind a").click(
-	function(){
+	function () {
 		//ActiveXObject
 		for (var i = 0; i < 13; i++) {
-            var a = document.getElementsByClassName("food_kind")[i].getElementsByTagName("a")[0];
-            a.className = "";
-        }
-		this.className="active2";
-		ShowFood($(this).attr("id"),applyRank);
-		
+			var a = document.getElementsByClassName("food_kind")[i].getElementsByTagName("a")[0];
+			a.className = "";
+		}
+		this.className = "active2";
+		ShowFood($(this).attr("id"), applyRank);
+
 	}
 );
 
-function applyRank(){
+function applyRank() {
 	$(".rank").raty({
 		hints: ['1', '2', '3', '4', '5'],
 		path: "./raty/images",
@@ -70,11 +63,11 @@ function applyRank(){
 					id: $(this).attr('id')
 				},
 				success: function (response) {
-					
+
 					alert(response);
-					
+
 				},
-				error: function(){
+				error: function () {
 
 				}
 			});
@@ -85,8 +78,8 @@ function applyRank(){
 		}
 	});
 }
-function ShowFood(kind,callback) {
-	
+function ShowFood(kind, callback) {
+
 	var xmlhttp;
 	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
@@ -118,18 +111,22 @@ function ShowFood(kind,callback) {
 				var text = json_food_list[i].description == null ? "" : json_food_list[i].description;
 				descriptionNode.innerHTML = "<p>" + text + "</P>";
 				//rank
-				var rank = document.createElement("div");
-				rank.setAttribute("class","rank");
-				rank.setAttribute("data_score",json_food_list[i].rank == null ? 0 : json_food_list[i].rank);
-				//console.log(rank.getAttribute("data_score"));
-				//除去之前的rank标签
-				var inner=cloneLi.getElementsByClassName("food_inner")[0];
-				var remove=inner.getElementsByClassName("rank")[0];
-				if(remove!=null)
-				inner.removeChild(remove);
-				inner.appendChild(rank);
-				//rank.id = json_food_list[i].name;
-				rank.id = json_food_list[i].id;
+				var state = cookieUtil.getCookie("state");
+				if (state == "login" || state == "logon") {
+					var rank = document.createElement("div");
+					rank.setAttribute("class", "rank");
+					rank.setAttribute("data_score", json_food_list[i].rank == null ? 0 : json_food_list[i].rank);
+					//console.log(rank.getAttribute("data_score"));
+					//除去之前的rank标签
+					var inner = cloneLi.getElementsByClassName("food_inner")[0];
+					var remove = inner.getElementsByClassName("rank")[0];
+					if (remove != null)
+						inner.removeChild(remove);
+					inner.appendChild(rank);
+					//rank.id = json_food_list[i].name;
+					rank.id = json_food_list[i].id;
+				}
+
 				ul.appendChild(cloneLi);
 			}
 			for (var i = 0; i < number; i++) {
@@ -140,7 +137,7 @@ function ShowFood(kind,callback) {
 	}
 	xmlhttp.open("GET", "./ShowFood?kind=" + kind, true);
 	xmlhttp.send();
-	
+
 }
 
 $(document).ready(function () {

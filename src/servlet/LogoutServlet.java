@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.CookieUtil;
+
 /**
  * Servlet implementation class LogoutServlet
  */
@@ -33,6 +35,8 @@ public class LogoutServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session=request.getSession();
         session.setAttribute("state", "log out"); 
+        //CookieUtil.deleteCookie(request,response,"state");
+        CookieUtil.setCookie(response, "state", "logout", -1);
         response.setContentType("text/html;charset=utf-8");
         response.sendRedirect(request.getContextPath()+"/main.html");
         //response.sendRedirect(request.getContextPath()+"/main.html");
